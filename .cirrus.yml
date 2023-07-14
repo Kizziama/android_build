@@ -1,0 +1,32 @@
+env:
+    GH_USER: "ENCRYPTED[1b3654e99103c8027b5b48685af9a2f50e09d40040db4664362794bf2f1c3f6d1c27dc98a399473320451bfcb370a7cd]"
+    GH_EMAIL: "ENCRYPTED[4f4ba6dc8c5b176ddd0df218da3e980c02ae1ff459966c08bfb5acd32a5ac6748824b5994370a87737a4ed1da00d0fd4]"
+    GH_KEY: "ENCRYPTED[f5c7368723a2f67b6eb30d0ade7915ac10d5384673ff3ae918ac5b5e335e8787edb37c8cf99dc9d6d7235e64fa2d8ef8]"
+    TELEGRAM_CHAT: "ENCRYPTED[4b6176c790debf74a436c4c50cd308998580edfd201877543d78759d9a69f27222f988e52beb099790e1f0c22cbd7983]"
+    TELEGRAM_TOKEN: "ENCRYPTED[f9da2e345aeb2b17c217c508678aed93d6dd745910ab139515cfbeab42e34881183879aa3482330a1bb21a63182bfecf]"
+
+task:
+  name: "Android Build"
+  timeout_in: 3h
+  container:
+      image: hoppless/ubuntu:latest
+      cpu: 8
+      memory: 32G
+
+  rclone_setup_script:
+      - mkdir -p ~/.config/rclone
+      - curl -so ~/.config/rclone/rclone.conf https://$GH_KEY@raw.githubusercontent.com/$GH_USER/misc/main/rclone.conf
+
+  git_setup_script:
+      - git config --global user.name "$GH_USER"
+      - git config --global user.email "$GH_EMAIL"
+      - echo "https://$GH_USER:$GH_KEY@github.com" > ~/.git-credentials
+      - git config --global credential.helper "store --file ~/.git-credentials"
+
+  ccache_stats_script:
+      - ccache -s
+
+  build_start_script:
+      - curl https://$GH_KEY@raw.githubusercontent.com/$GH_USER/misc/main/build.sh > build.sh
+      - bash build.sh
+
