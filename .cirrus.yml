@@ -6,8 +6,8 @@ env:
     TELEGRAM_TOKEN: "ENCRYPTED[f9da2e345aeb2b17c217c508678aed93d6dd745910ab139515cfbeab42e34881183879aa3482330a1bb21a63182bfecf]"
 
 task:
-  name: "Android Build"
-  timeout_in: 3h
+  name: "Fortune Build"
+  timeout_in: 4h
   container:
       image: hoppless/ubuntu:latest
       cpu: 8
@@ -27,6 +27,6 @@ task:
       - ccache -s
 
   build_start_script:
-      - curl https://$GH_TOKEN@raw.githubusercontent.com/$GH_USER/misc/main/fortune-build > build
-      - bash build
+      - curl https://$GH_TOKEN@raw.githubusercontent.com/$GH_USER/misc/main/build.sh > build.sh
+      - bash build.sh
 
