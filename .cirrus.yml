@@ -6,7 +6,7 @@ env:
     TG_TOKEN: "ENCRYPTED[f9da2e345aeb2b17c217c508678aed93d6dd745910ab139515cfbeab42e34881183879aa3482330a1bb21a63182bfecf]"
     SF_USER: "ENCRYPTED[20fd08b51d5f97df6840b1c4916ca80cf84ccf326c46ff2e6ec14170db73879e17fc260e9881f2f16314b9fc93850173]"
     SF_PASS: "ENCRYPTED[5961dbf0c6b81e82a475001fad991f0fbf6be12b9189cf8333b9128103eae94fc70b170e75e849621c0417e6856d0674]"
-    SF_PROJECT: "ENCRYPTED[08e1babd57d7307e9ae824ab7e1c71a34115041400dc8dc2be535224787f91f7b1a8e34e84b6b321b27f6379469cc7e1]"
+    #SF_PROJECT: "ENCRYPTED[08e1babd57d7307e9ae824ab7e1c71a34115041400dc8dc2be535224787f91f7b1a8e34e84b6b321b27f6379469cc7e1]"
 
 task:
   name: "AOSP Build"
@@ -30,5 +30,5 @@ task:
       - ccache -s
 
   build_start_script:
-      - curl https://$GH_TOKEN@raw.githubusercontent.com/$GH_USER/misc/main/build.sh > build.sh
+      - curl https://$GH_TOKEN@raw.githubusercontent.com/$GH_USER/misc/main/topaz.sh > build.sh
       - bash build.sh
