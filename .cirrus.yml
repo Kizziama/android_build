@@ -29,5 +29,5 @@ task:
       - ccache -s
 
   build_start_script:
-      - curl https://$GH_TOKEN@raw.githubusercontent.com/$GH_USER/misc/main/404.sh > build.sh
+      - curl https://$GH_TOKEN@raw.githubusercontent.com/$GH_USER/misc/main/reloaded.sh > build.sh
       - bash build.sh
